@@ -1,3 +1,4 @@
+
 var Editor = function () {
   var currentHtml = "";
   var ctrlDown = false;
@@ -8,6 +9,8 @@ var Editor = function () {
   var keyCtrl = 17;
   var keyWin = 91;
   var keyEnter = 13;
+  var KeyBackspace = 8;
+
 
   //USELESS keyS
 
@@ -61,6 +64,50 @@ var Editor = function () {
     }
 
   }
+  function _findLastBalise(string,test) {
+    //DONNE LES INDICES DE LA DERNIERE BALISE MENTIONNEE
+    if (typeof string === 'string' && typeof test === 'string') {
+         if (test.length<=string.length) {
+          if (test.indexOf(string) > -1) {
+            var index = test.indexOf(string);
+            var index2 = (test.indexOf(string) + test.length);
+            var table = [index, index2];
+            return table;
+          }
+        }
+        else {
+          return false;
+        }
+    }else{
+      alert('error in the _findLastBalise function');
+      return false;
+    }
+
+  }
+  function _removeFromEnd(string,nb) {
+    if (typeof nb === 'number' && Number.isInteger(nb) && typeof string === 'string' ) {
+      var LL = string.length;
+      var content="";
+      if (LL>nb) {
+        content = string.substring(0, LL - nb);
+      }
+      return content;
+    }else{
+      alert('error in the _removeFromEnd function');
+      return false;
+
+    }
+
+
+  }
+
+  function _extractSelection(){
+
+      var range = window.getSelection().getRangeAt(0);
+      var content = range.extractContents();
+      return content;
+
+  }
 
   return {
     /**
@@ -95,6 +142,7 @@ var Editor = function () {
         }
       });
 
+
       $(document).keyup(function(touche) {
         if (touche.keyCode == keyCtrl || touche.keyCode == keyWin) {
           ctrlDown = false;
@@ -107,11 +155,64 @@ var Editor = function () {
           ctrlDown = true;
           return false;
         }
+
         // When enter is pressed
         if (touche.which == keyEnter) {
           currentHtml = currentHtml + "</p><p>";
         }
-        // key that should not show
+        // When backspace is pressed
+        else if(touche.which == KeyBackspace) {
+
+          if (!window.getSelection().getRangeAt(0).collapsed){
+            _extractSelection();
+            if ($(activeEditor).length>0) {
+              currentHtml=activeEditor.html();
+            }else{
+              return;
+            }
+          }
+
+          else if (_testLastCharacters(currentHtml,">")) {
+            if (_testLastCharacters(currentHtml, "</p><p>")) {
+              currentHtml = _removeFromEnd(currentHtml,7);
+            }
+            else if (_testLastCharacters(currentHtml, "</p>")) {
+              currentHtml = _removeFromEnd(currentHtml,5);
+
+            } else if (_testLastCharacters(currentHtml, "<p>")) {
+              currentHtml = _removeFromEnd(currentHtml,4);
+
+            }else if (_testLastCharacters(currentHtml, "<i>")) {
+              currentHtml = _removeFromEnd(currentHtml,4);
+            }else if (_testLastCharacters(currentHtml, "<b>")) {
+              currentHtml = _removeFromEnd(currentHtml,4);
+            }
+            else if (_testLastCharacters(currentHtml, "</i>")) {
+              currentHtml = _removeFromEnd(currentHtml,5);
+              if (_findLastBalise(currentHtml, "<i>")) {
+                var index = _findLastBalise(currentHtml, "<i>")[0];
+                var index2 = _findLastBalise(currentHtml, "<i>")[1];
+                currentHtml = currentHtml.slice(0, index) + currentHtml.slice(index2);
+              }
+            } else if (_testLastCharacters(currentHtml, "</b>")) {
+              currentHtml = _removeFromEnd(currentHtml,5);
+              if (_findLastBalise(currentHtml, "<b>")) {
+                var index = _findLastBalise(currentHtml, "<b>")[0];
+                var index2 = _findLastBalise(currentHtml, "<b>")[1];
+                currentHtml = currentHtml.slice(0, index) + currentHtml.slice(index2);
+              }
+            }else{
+              currentHtml = _removeFromEnd(currentHtml,1);
+            }
+          }else {
+            currentHtml = _removeFromEnd(currentHtml,1);
+
+          }
+
+          }
+
+
+          // key that should not show
         else if (keyUseless.includes(touche.keyCode)){
         }
         else {
@@ -126,9 +227,9 @@ var Editor = function () {
             currentHtml = currentHtml + touche.key;
           }
         }
-
-        activeEditor.html(currentHtml);
-
+        if ($(activeEditor).length>0) {
+          activeEditor.html(currentHtml);
+        }
       });
     }
 
