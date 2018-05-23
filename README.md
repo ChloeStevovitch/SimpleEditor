@@ -3,7 +3,14 @@
 
 This project aim to convert any div into a simple text editor. 
 
-**IMPORTANT : this is a current light version of the editor. New features as the possiblity to use backspace, selection, ctrl-space, ctrl-b, ctrl-i are coming soon.**
+**IMPORTANT : this is a current light version of the editor. New features are currently in developement.**
+
+**List of actual features :
+- type text
+- "enter" command
+- "backspace" command
+- "selection" + "backspace" command
+**
 
 
 ## Getting Started
