@@ -79,3 +79,9 @@ Editors are correctly initialized
 This project is licensed under the The GNU General Public License - see the [Licence.md](https://github.com/ChloeStevovitch/SimpleEditor/blob/master/LICENSE) file for details
 
 
+
+# Donation Button
+
+[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=chloe%2estevovitch%40gmail%2ecom&lc=CA&item_name=Github%20SimpleEditor&no_note=0&currency_code=CAD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHostedGuest)
+
+
