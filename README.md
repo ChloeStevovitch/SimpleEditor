@@ -38,7 +38,7 @@ Make the import in your html file (after Jquery) :
 </head>
 
 ```
-Then create one of many div that you want to use as text editor(s). Add them the class "sampleEditor".
+Then create one of many div that you want to use as text editor(s). Add them the class "simpleEditor".
 
 _Example :_
 ```
@@ -70,15 +70,12 @@ Once initialized the console should show the line :
 Editors are correctly initialized
 ```
 
-
 ## Authors
 
 * **Chloe STEVOVITCH** - *Initial work* - [https://github.com/ChloeStevovitch]
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
-
 ## License
 
-This project is licensed under the The GNU General Public License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the The GNU General Public License - see the [Licence.md](https://github.com/ChloeStevovitch/SimpleEditor/blob/master/LICENSE) file for details
 
 
