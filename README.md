@@ -1,17 +1,10 @@
 # SimpleEditor
 
-
 This project aim to convert any div into a simple text editor. 
-
-**IMPORTANT : this is a current light version of the editor. New features are currently in developement.**
-
-**List of actual features :
-- type text
+This is a light version including the features :
 - "enter" command
 - "backspace" command
 - "selection" + "backspace" command
-**
-
 
 ## Getting Started
 
